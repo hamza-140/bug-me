@@ -1,0 +1,22 @@
+<% if can? :read, @bug %>
+  <p>
+    <strong>Title:</strong>
+    <%= @bug.title %>
+  </p>
+  
+  <p>
+    <strong>Description:</strong>
+    <%= @bug.description %>
+  </p>
+  
+  <p>
+    <strong>Developer:</strong>
+    <%= @bug.user ? @bug.user.email : "Unassigned" %>
+  </p>
+  
+  <% if can? :update, @bug %>
+    <%= link_to 'Edit', edit_project_bug_path(@project, @bug) %> |
+  <% end %>
+<% end %>
+
+<%= link_to 'Back', project_bugs_path(@project) %>

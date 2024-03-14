@@ -1,0 +1,10 @@
+<% if can? :update, @bug %>
+  <h1>Edit Bug</h1>
+
+  <%= render 'form' %>
+
+  <%= link_to 'Show', project_bug_path(@project, @bug) %> |
+  <%= link_to 'Back', project_bugs_path(@project) %>
+<% else %>
+  <p>You are not authorized to edit this bug.</p>
+<% end %>

@@ -1,0 +1,9 @@
+<% if can? :create, Bug %>
+  <h1>New Bug</h1>
+  
+  <%= render 'form' %>
+  
+  <%= link_to 'Back', project_bugs_path(@project) %>
+<% else %>
+  <p>You are not authorized to create a new bug.</p>
+<% end %>

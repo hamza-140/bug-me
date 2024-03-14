@@ -1,0 +1,30 @@
+<div class="d-flex justify-content-center align-items-center">
+    <h1>Project Details</h1>
+  </div>
+  <form>
+    <div class="mb-3">
+      <label for="name" class="form-label">Project Name:</label>
+      <input readonly class="form-control" id="name" aria-describedby="name" value='<%= @project.name %>' >
+    </div>
+    <div class="mb-3">
+      <label for="description" class="form-label">Project Description:</label>
+      <input readonly class="form-control" id="description" aria-describedby="description" value='<%= @project.description %>'>
+    </div>
+    <div class="mb-3">
+      <label for="project_users" class="form-label">Project Users:</label>
+      <input readonly class="form-control" id="project_users" aria-describedby="project_users" value='<%= @project.users.pluck(:name).join(", ") %>'>
+    </div>
+
+    
+    <h2>Bugs</h2>
+    <ul>
+      <% @project.bugs.each do |bug| %>
+        <li><%= bug.title %>: <%= bug.description %></li>
+      <% end %>
+    </ul>
+    
+    <!-- app/views/bugs/new.html.erb -->
+
+
+
+  
