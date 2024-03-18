@@ -1,6 +1,4 @@
-<h1>Projects#new</h1>
-<p>Find me in app/views/projects/new.html.erb</p>
-
+<div class="wrapper">
 <% if can? :create, Project %> <%= form_for(@project) do |f| %> <% if
 @project.errors.any? %>
 <div id="error_explanation">
@@ -16,32 +14,36 @@
   </ul>
 </div>
 <% end %>
-
-<div class="field">
-  <%= f.label :name %><br />
-  <%= f.text_field :name %>
+<div class="text-center mt-4 name">
+            New Project
+  </div>
+  <div class="mb-3">
+  <%= f.label :name ,class: "form-label"%>
+  <%= f.text_field :name , class:"form-control",placeholder:'Project Name',required: true %>
 </div>
 
-<div class="field">
-  <%= f.label :description %><br />
-  <%= f.text_area :description %>
+<div class="mb-3">
+  <%= f.label :description,class:"form-label" %>
+  <%= f.text_area :description , class:"form-control",placeholder:'Project Description',required: true%>
 </div>
 
 <% if can? :manage, :users %>
-<div class="field">
-  <%= f.label :developers %><br />
+<div class="mb-3">
+  <%= f.label :developers,class:"form-label" %><br/>
   <%= f.collection_check_boxes :user_ids, User.where(role: "developer"), :id,
-  :name %>
+  :name ,{class:"form-check-input"}%>
 </div>
 
-<div class="field">
+<div class="mb-3">
   <%= f.label :quality_assurance %><br />
   <%= f.collection_check_boxes :user_ids, User.where(role: "quality_assurance"),
   :id, :name %>
 </div>
 <% end %>
 
-<div class="actions"><%= f.submit %></div>
+<div class="actions"><%= f.submit"Add",class:"btn mt-3" %></div>
 <% end %> <% else %>
 <p>You are not authorized to create projects.</p>
 <% end %>
+<%= link_to "Return", projects_path , class:"btn mt-3"%>
+</div>
