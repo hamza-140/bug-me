@@ -9,6 +9,7 @@ class BugsController < ApplicationController
 
   def create
     @bug = @project.bugs.new(bug_params)
+    @bug.created_by = current_user.id
 
     if @bug.save
       @project.users << @bug.user unless @project.users.include?(@bug.user)
@@ -28,7 +29,7 @@ class BugsController < ApplicationController
 
   def destroy
     @bug.destroy
-    redirect_to project_bugs_path(@project), notice: "Bug deleted successfully."
+    redirect_to project_path(@project), notice: "Bug deleted successfully."
   end
 
   def show

@@ -6,9 +6,13 @@ class ProjectsController < ApplicationController
     @projects = current_user.projects.all
   end
 
+  def bugs
+    @projects = current_user.projects.all
+  end
+
   def create
     @project = Project.new(project_params)
-    @project.users << current_user # Add the creator of the project
+    @project.users << current_user
 
     if @project.save
       if params[:user_ids].present?
@@ -39,7 +43,8 @@ class ProjectsController < ApplicationController
   end
 
   def show
-    @bug = Bug.new(project: @project) # Initialize a new bug for the form with the associated project
+    @bug = Bug.new(project: @project)
+    @bugs = @project.bugs.where("user_id = ? OR created_by = ?", current_user.id, current_user.id)
   end
 
   def new

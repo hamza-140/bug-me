@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   end
 
   root to: 'projects#index'
-
+  get '/projects/bugs', to: 'projects#bugs'
   resources :projects do
     resources :bugs
   end
