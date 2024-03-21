@@ -6,7 +6,6 @@ Rails.application.routes.draw do
   devise_scope :user do
     get '/users/sign_out' => 'devise/sessions#destroy'
   end
-  get '*path', to: 'errors#not_found', via: :all
   root to: 'projects#index'
   get '/projects/bugs', to: 'projects#bugs'
   resources :projects do
