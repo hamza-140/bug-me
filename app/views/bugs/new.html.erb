@@ -2,4 +2,5 @@
   <%= render 'form' ,update_check: false %>  
 <% else %>
   <p>You are not authorized to create a new bug.</p>
+  <%= link_to "Return", projects_path,class:"btn btn-primary mt-3" %> 
 <% end %>

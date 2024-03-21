@@ -3,13 +3,20 @@ class ProjectsController < ApplicationController
   before_action :set_project, only: [:show,:edit,:update,:destroy]
 
   def index
-    @projects = current_user.projects.all
+    @projects = Project.accessible_by(current_ability)
+    @query = params[:query]
+    @results = User.where("column LIKE ?", "%#{@query}%")
+    render layout: false # Render without layout for AJAX request
   end
 
   def bugs
     @projects = current_user.projects.all
   end
-
+  def search
+    @query = params[:q]
+    @results = User.where("name LIKE ?", "%#{@query}%")
+    render json: @results
+  end
   def create
     @project = Project.new(project_params)
     @project.users << current_user

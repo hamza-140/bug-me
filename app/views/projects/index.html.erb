@@ -92,3 +92,14 @@
 </div>
 
 <h3>Welcome <%= current_user.name %>! 👋 </h3>
+<!-- Separate table for displaying search results -->
+<h1>Search</h1>
+
+<form id="search-form">
+  <input type="text" id="query" name="query" placeholder="Enter your search query">
+  <input type="submit" value="Search">
+</form>
+
+<div id="search-results">
+  <!-- Search results will be displayed here -->
+</div>
