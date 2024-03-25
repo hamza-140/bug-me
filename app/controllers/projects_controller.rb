@@ -1,16 +1,16 @@
 class ProjectsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_project, only: [:show,:edit,:update,:destroy]
+  authorize_resource
 
   def index
     @projects = Project.accessible_by(current_ability)
-
   end
 
   def bugs
     @projects = current_user.projects.all
   end
-  
+
   def create
     @project = Project.new(project_params)
     @project.users << current_user
@@ -40,7 +40,12 @@ class ProjectsController < ApplicationController
 
 
   def destroy
+    @project.destroy
+    redirect_to projects_url, notice: 'Project was successfully destroyed.'
+  end
 
+  def users
+    @users = User.all
   end
 
   def show
@@ -51,7 +56,7 @@ class ProjectsController < ApplicationController
   def new
     @project = Project.new
     @users = User.all
-    @bug = Bug.new(project: @project) # Initialize a new bug for the form with the associated project
+    @bug = Bug.new(project: @project)
   end
 
   def edit

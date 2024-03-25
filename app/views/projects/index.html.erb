@@ -20,8 +20,11 @@
         <a style="text-decoration:none" class="btn btn-outline-warning mx-2 text-nowrap" href="<%= projects_bugs_path %>">New Bug</a>
       <% end %>
       <a href="#" style="text-decoration:none" class="btn btn-outline-info mx-2 text-nowrap" data-bs-toggle="modal" data-bs-target="#exampleModalCenter">
-  <i class="bi bi-info-circle"></i>
-</a>
+        <i class="bi bi-info-circle"></i>
+      </a>
+      <a href="<%=projects_users_path%>" style="text-decoration:none" class="btn btn-outline-secondary mx-2 text-nowrap">
+        <i class="bi bi-people"></i>
+      </a>
     <!-- Modal -->
 <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
@@ -79,8 +82,11 @@
                   <%= link_to "", project_path(project), class: "bi bi-eye-fill px-2", style: "color:green" %>
                   <% if can? :manage, project %>
                     <%= link_to "", edit_project_path(project), class: "bi bi-pencil-square px-2", style: "color:orange" %>
-                    <%= button_to "", project_path(project), method: :delete, data: { confirm: 'Are you sure?' }, class: "bi bi-trash3-fill px-2", style: 'color:red;background:none;border:none' %>
-                  <% end %>
+                    <%= link_to "Destroy",project_path(project), data: {
+                    turbo_method: :delete,
+                    turbo_confirm: "Are you sure?"
+                    },style:'text-decoration:none;' %>
+                                      <% end %>
                 </div>
               </div>
             </td>

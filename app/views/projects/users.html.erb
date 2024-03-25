@@ -1,0 +1,64 @@
+<nav class="navbar">
+    <h2>BugMe</h2>
+    <%= link_to "Return", projects_path , class:"btn btn-primary mt-3"%>
+</nav>
+
+<h4>List of Users:</h4>
+<div class="input-group">
+  <div class="form-outline" data-mdb-input-init>
+    <input type="search" id="search-box" class="form-control" placeholder="Search" />
+  </div>
+</div>
+<div class="container">
+  <div class="row ">
+    <div class="card l-bg-cherry">
+        <div class="card-statistic-3 p-4">
+            <div class="mb-4">
+            </div>
+            <div class="row align-items-center mb-2 d-flex">
+                <div class="col-8">
+                  <div id="search-results"></div>
+                </div>
+            </div>
+        </div>
+      </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    const users = <%= @users.to_json.html_safe %>;
+
+    function filterResults(searchTerm) {
+        const matchingResults = users.filter(item => item.name.toLowerCase().includes(searchTerm));
+
+        if (matchingResults.length > 0 || document.getElementById('search-box').value == '') {
+            $('#search-results').empty();
+            matchingResults.forEach(result => {
+                $('#search-results').append(`<p>${result.name}</p>`);
+            });
+        } else {
+            $('#search-results').empty().text('No results found.');
+        }
+    }
+
+    // Initial display on page load
+    $(document).ready(function() {
+        filterResults('');
+    });
+
+    $('#search-box').on('input', function () {
+        const searchTerm = $(this).val().toLowerCase();
+        filterResults(searchTerm);
+    });
+
+    // Refresh the page once on navigation
+    window.onload = function() {
+        if (!sessionStorage.getItem('refreshed')) {
+            sessionStorage.setItem('refreshed', 'true');
+            location.reload();
+        } else {
+            sessionStorage.removeItem('refreshed');
+        }
+    };
+</script>

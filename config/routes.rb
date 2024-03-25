@@ -8,7 +8,9 @@ Rails.application.routes.draw do
   end
   root to: 'projects#index'
   get '/projects/bugs', to: 'projects#bugs'
+  get '/projects/users', to: 'projects#users'
   resources :projects do
     resources :bugs
   end
+    match "*path", to: "errors#not_found", via: :all
 end

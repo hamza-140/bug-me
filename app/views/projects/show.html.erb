@@ -21,7 +21,7 @@
     <% if @bugs.empty? %>
     <div style="display: flex; justify-content: center; align-items: center; height: 10vh;">
     <p>No Bugs! Add New Bug.</p>
-  </div>    
+  </div>
   <% else %>
       <% @bugs.each do |bug| %>
         <tbody class="projectRow">
@@ -37,7 +37,7 @@
                   turbo_method: :delete,
                   turbo_confirm: "Are you sure?"
                 } %>
-                </p>                  
+                </p>
                 <% end %>
                 </div>
               </div>
@@ -49,10 +49,9 @@
   </table>
 </div>
     <% if can? :create,Bug %>
-        <a style="text-decoration:none" class="btn btn-outline-warning mx-2 text-nowrap" href="<%= projects_bugs_path %>">New Bug</a>
+        <a style="text-decoration:none" class="btn btn-outline-warning mx-2 text-nowrap" href="<%= new_project_bug_path(@project) %>">New Bug</a>
+        <% end %>
+        <% if can? :edit, @project%>
+        <%= link_to "Edit", edit_project_path(@project), class: "btn btn-outline-success" %>
       <% end %>
     <a style="text-decoration:none" class="btn btn-outline-primary mx-2 text-nowrap" href="<%= projects_path %>">Return</a>
-
-
-
-  
