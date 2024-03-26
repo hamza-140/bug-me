@@ -1,6 +1,6 @@
 <div class="wrapper">
   <% if can? :create, Project %>
-    <%= form_for(@project, html: { id: "project-form" }) do |f| %>
+    <%= form_with model:@project do |f| %>
       <%= render "users/shared/error_messages", resource: @project %>
 
       <div class="text-center mt-4 name">
@@ -9,15 +9,15 @@
 
       <div class="mb-3">
         <%= f.label :name, class: "form-label" %>
-        <%= f.text_field :name, class: "form-control", placeholder: 'Project Name', autofocus:true, required: true %>
+        <%= f.text_field :name, class: "form-control", placeholder: 'Project Name', autofocus:true %>
       </div>
 
       <div class="mb-3">
         <%= f.label :description, class: "form-label" %>
-        <%= f.text_area :description, class: "form-control", placeholder: 'Project Description', required: true, minlength: 10 %>
-        <small id="descriptionHelp" class="form-text text-muted">Minimum 10 characters required.</small>
+        <%= f.text_area :description, class: "form-control", placeholder: 'Project Description', required: true %>
       </div>
 
+      <% if can? :manage, :users %>
         <div class="mb-3">
           <%= f.label :developers, class: "form-label" %><br/>
           <%= f.collection_check_boxes :user_ids, User.where(role: "developer"), :id, :name, class: "form-check-input" %>
@@ -27,6 +27,7 @@
           <%= f.label :quality_assurance %><br />
           <%= f.collection_check_boxes :user_ids, User.where(role: "quality_assurance"), :id, :name %>
         </div>
+      <% end %>
 
       <div class="actions">
         <%= f.submit "Add", class: "btn mt-3" %>

@@ -1,21 +1,7 @@
 <div class="wrapper">
-  
-<%= form_with(model: [@project, @bug], local: true) do |form| %>
-<% if
-@bug.errors.any? %>
-<div id="error_explanation">
-  <h2>
-    <%= pluralize(@bug.errors.count, "error") %> prohibited this bug
-    from being created:
-  </h2>
 
-  <ul>
-    <% @bug.errors.full_messages.each do |message| %>
-    <li><%= message %></li>
-    <% end %>
-  </ul>
-</div>
-<% end %>
+<%= form_with(model: [@project, @bug], local: true) do |form| %>
+<%= render "users/shared/error_messages", resource: @bug %>
 <div class="text-center mt-4 name">
   <%= update_check ? "Update" : "New" %> Bug for <%= @project.name %>  </div>
   <div class="mb-3">
@@ -32,7 +18,7 @@
     <i class="bi bi-person-plus"></i>
     <%= form.collection_select :user_id,User.where(role: "developer"), :id, :name, prompt: "Select developer" ,class:"form-select",required: true%>
   </div>
-  
+
 
   <div class="actions">
     <%= form.submit(update_check ? "Update" : "Create", class: "btn btn-primary mt-3") %>

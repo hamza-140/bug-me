@@ -15,7 +15,7 @@ class BugsController < ApplicationController
       @project.users << @bug.user unless @project.users.include?(@bug.user)
       redirect_to project_bug_path(@project, @bug), notice: "Bug created successfully."
     else
-      render :new
+      render :new, status: :unprocessable_entity
     end
   end
 
