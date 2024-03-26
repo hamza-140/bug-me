@@ -25,7 +25,7 @@ class ProjectsController < ApplicationController
       redirect_to @project, notice: "Success"
     else
       @users = User.all
-      render :new
+      render :new, status: :unprocessable_entity
     end
   end
 
