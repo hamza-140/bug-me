@@ -13,6 +13,9 @@ class ApplicationController < ActionController::Base
   def render_404
     render file: "#{Rails.root}/public/404.html", layout: false, status: :not_found
   end
+  def after_sign_up_path_for(resource)
+    root_path
+  end
 
   protected
 

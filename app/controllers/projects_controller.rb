@@ -8,7 +8,7 @@ class ProjectsController < ApplicationController
   end
 
   def bugs
-    @projects = current_user.projects.all
+    @projects = Project.accessible_by(current_ability)
   end
 
   def create
